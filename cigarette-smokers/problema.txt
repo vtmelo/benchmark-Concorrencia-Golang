@@ -1,0 +1,9 @@
+O problema dos fumantes é um problema clássico de sincronização. Considere a situação com três fumantes (três
+threads) e um representante de cigarros (uma thread). Cada fumante continuamente faz os próprios cigarros e os
+fuma. Para fazer os cigarros, cada fumante precisa de três ingredientes: tabaco, papel e fósforos. Uma das thread de
+fumante tem somente papel, a outra tem somente tabaco e a terceira tem somente fósforos. O representante de
+cigarros tem um estoque infinito dos três materiais. As três threads fumantes estão inicialmente bloqueadas. O
+representante de cigarros escolhe randomicamente dois ingredientes diferentes, os coloca na mesa e desbloqueia o
+fumante que tiver o ingrediente restante. O representante então bloqueia. O fumante que está desbloqueado remove
+os dois ingredientes da mesa, faz o cigarro e o fuma por um tempo aleatório, desbloqueando o representante quando
+terminar de fumar o cigarro. O representante então coloca outros dois ingredientes na mesa, e o ciclo se repete.
