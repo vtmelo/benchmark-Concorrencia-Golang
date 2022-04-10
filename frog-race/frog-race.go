@@ -14,6 +14,7 @@ const DISTANCIA int = 500
 const PULO_MAXIMO int64 = 50
 
 var COLOCACAO = 0
+var wg sync.WaitGroup
 
 type frog struct {
 	name              string
@@ -65,7 +66,7 @@ func (f *frog) printFinalPosition() {
 	fmt.Printf("*****O sapo %s chegou na posição %d com %d pulos*****\n", f.name, COLOCACAO, f.totalJumps)
 	rw.Unlock()
 }
-func (f *frog) run(wg *sync.WaitGroup) {
+func (f *frog) run() {
 	for f.distanceRace < f.totalDistanceRace {
 		f.jump()
 		f.printActualSituation()
@@ -76,11 +77,10 @@ func (f *frog) run(wg *sync.WaitGroup) {
 }
 
 func main() {
-	var wg sync.WaitGroup
 	wg.Add(NUM_SAPOS)
 	for i := 1; i <= NUM_SAPOS; i++ {
 		frog := newFrog("SAPO_" + strconv.Itoa(i))
-		go frog.run(&wg)
+		go frog.run()
 	}
 	wg.Wait()
 }
